@@ -11,11 +11,10 @@ returns nvarchar (50)
 as
 begin
 declare @Result nvarchar (50)
-select @Result = Right(StudentCardNumber, Len(StudentCardNumber-3) + '-' + SUBSTRING(FirstName,1,1) + '.' + LastName)
+select @Result = Trim('sc-' from StudentCardNumber + '-' + SUBSTRING(FirstName,1,1) + '.' + LastName)
 from [dbo].[Student]
 where [ID] = @StudentId
 return @Result
 end
 
-select [dbo].[fn_FormatStudentName] (4) 
--- Mi dava Conversion failed when converting the nvarchar value 'sc-82787' to data type int. 
+select [dbo].[fn_FormatStudentName] (100) 
